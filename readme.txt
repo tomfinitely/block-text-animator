@@ -1,7 +1,7 @@
 
 === Text Animator ===
 
-Contributors:      WordPress Telex
+WordPress Telex, Tom Finley
 Tags:              block, animation, text, typewriter, effects
 Tested up to:      6.8
 Stable tag:        0.2.0

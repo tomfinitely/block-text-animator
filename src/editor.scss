@@ -7,13 +7,16 @@
 .wp-block-telex-block-text-animator {
 	// Editor preview area
 	.text-animator__editor-preview {
-		padding: 1.5em;
+		padding: 1em;
 		border: 2px dashed #ddd;
 		border-radius: 6px;
 		margin-bottom: 1.5em;
 		background: rgba(255, 255, 255, 0.5);
 		transition: border-color 0.2s ease;
 		text-align: left; // Consistent left alignment
+		max-height: 200px;
+		overflow: auto;
+		font-size: clamp(1rem, 1em, 3rem); // Cap font size in editor
 
 		&:hover {
 			border-color: #007cba;
@@ -32,7 +35,6 @@
 	.text-animator__preview-text {
 		font-weight: 500;
 		color: #007cba;
-		font-style: italic;
 	}
 
 	.text-animator__help {
@@ -49,6 +51,9 @@
 	.text-animator__editor-content {
 		position: relative;
 		width: 100%;
+		max-height: 400px;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 
 	// Appender container
@@ -63,6 +68,7 @@
 	.text-animator__add-item {
 		display: inline-flex;
 		align-items: center;
+		font-size: clamp(1rem, 1em, 3rem);
 		justify-content: center;
 		gap: 0.5em;
 		padding: 0.75em 1em;
@@ -70,7 +76,6 @@
 		border-radius: 4px;
 		background: transparent;
 		color: #666;
-		font-size: 0.9em;
 		cursor: pointer;
 		transition: all 0.2s ease;
 		min-width: 120px;
@@ -165,7 +170,7 @@
 		min-width: 100px;
 		width: 100%;
 		box-sizing: border-box;
-		font-size: inherit;
+		font-size: clamp(1rem, 1em, 2.5rem); // Cap font size in editor items
 
 		&:focus {
 			border-color: #007cba;

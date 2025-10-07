@@ -1,0 +1,146 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "telex/block-text-animator",
+  "version": "0.2.0",
+  "title": "Text Animator",
+  "category": "text",
+  "icon": "editor-textcolor",
+  "description": "Create engaging animated text that cycles through different strings with various visual effects.",
+  "example": {
+    "attributes": {
+      "prefix": "Say ",
+      "suffix": " to everyone!",
+      "animationType": "typewriter",
+      "layout": "row"
+    },
+    "innerBlocks": [
+      {
+        "name": "telex/text-animator-item",
+        "attributes": {
+          "text": "Welcome"
+        }
+      },
+      {
+        "name": "telex/text-animator-item",
+        "attributes": {
+          "text": "Hello"
+        }
+      },
+      {
+        "name": "telex/text-animator-item",
+        "attributes": {
+          "text": "Greetings"
+        }
+      }
+    ]
+  },
+  "attributes": {
+    "prefix": {
+      "type": "string",
+      "default": ""
+    },
+    "suffix": {
+      "type": "string",
+      "default": ""
+    },
+    "animationType": {
+      "type": "string",
+      "default": "typewriter"
+    },
+    "animationDuration": {
+      "type": "number",
+      "default": 1000
+    },
+    "displayDuration": {
+      "type": "number",
+      "default": 2000
+    },
+    "layout": {
+      "type": "string",
+      "default": "row"
+    }
+  },
+  "providesContext": {
+    "textAnimator/animationType": "animationType",
+    "textAnimator/layout": "layout"
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "left",
+      "center",
+      "right",
+      "wide",
+      "full"
+    ],
+    "alignWide": true,
+    "anchor": true,
+    "__experimentalLayout": {
+      "allowSwitching": false,
+      "allowInheriting": false,
+      "default": {
+        "type": "constrained"
+      }
+    },
+    "dimensions": {
+      "minHeight": true,
+      "aspectRatio": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "radius": true,
+        "style": true,
+        "width": true
+      }
+    },
+    "position": {
+      "sticky": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true,
+      "__experimentalDefaultControls": {
+        "margin": false,
+        "padding": false,
+        "blockGap": false
+      }
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalTextTransform": true,
+      "__experimentalLetterSpacing": true,
+      "__experimentalWritingMode": true,
+      "__experimentalTextOrientation": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "color": {
+      "text": true,
+      "background": true,
+      "gradients": true,
+      "link": true,
+      "__experimentalDefaultControls": {
+        "background": true,
+        "text": true
+      }
+    },
+    "__experimentalSelector": ".wp-block-telex-block-text-animator"
+  },
+  "textdomain": "text-animator",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

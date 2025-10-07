@@ -1,0 +1,213 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-telex-block-text-animator {
+	// Editor preview area
+	.text-animator__editor-preview {
+		padding: 1.5em;
+		border: 2px dashed #ddd;
+		border-radius: 6px;
+		margin-bottom: 1.5em;
+		background: rgba(255, 255, 255, 0.5);
+		transition: border-color 0.2s ease;
+		text-align: left; // Consistent left alignment
+
+		&:hover {
+			border-color: #007cba;
+		}
+	}
+
+	.text-animator__content {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.25em;
+		width: 100%;
+		justify-content: flex-start; // Always start from left
+	}
+
+	.text-animator__preview-text {
+		font-weight: 500;
+		color: #007cba;
+		font-style: italic;
+	}
+
+	.text-animator__help {
+		margin-top: 0.75em;
+		padding-top: 0.75em;
+		border-top: 1px solid #eee;
+		font-style: italic;
+		color: #666;
+		font-size: 0.9em;
+		text-align: left; // Consistent left alignment
+	}
+
+	// Editor content area
+	.text-animator__editor-content {
+		position: relative;
+		width: 100%;
+	}
+
+	// Appender container
+	.text-animator__appender {
+		margin-top: 1em;
+		padding-top: 1em;
+		border-top: 1px solid #eee;
+		text-align: left; // Ensure button aligns left
+	}
+
+	// Add item button
+	.text-animator__add-item {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5em;
+		padding: 0.75em 1em;
+		border: 2px dashed #ddd;
+		border-radius: 4px;
+		background: transparent;
+		color: #666;
+		font-size: 0.9em;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		min-width: 120px;
+
+		&:hover {
+			border-color: #007cba;
+			background-color: rgba(0, 124, 186, 0.05);
+			color: #007cba;
+		}
+
+		.dashicon,
+		svg {
+			fill: currentColor;
+			width: 18px;
+			height: 18px;
+		}
+	}
+
+	// Layout-specific styles
+	&.text-animator--layout-row {
+		.text-animator__items {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.75em;
+			align-items: stretch;
+			width: 100%;
+		}
+	}
+
+	&.text-animator--layout-column {
+		.text-animator__items {
+			display: flex;
+			flex-direction: column;
+			gap: 0.75em;
+			width: 100%;
+		}
+	}
+
+	// Alignment support - ensure the block respects alignment settings
+	&.alignleft {
+		max-width: 50%;
+		margin-right: 2em;
+		margin-left: 0;
+	}
+
+	&.alignright {
+		max-width: 50%;
+		margin-left: 2em;
+		margin-right: 0;
+	}
+
+	&.aligncenter {
+		margin-left: auto;
+		margin-right: auto;
+		
+		.text-animator__editor-preview,
+		.text-animator__appender {
+			text-align: center;
+		}
+		
+		.text-animator__content {
+			justify-content: center;
+		}
+	}
+
+	&.alignwide {
+		max-width: var(--wp--style--global--wide-size, 1280px);
+		width: 100%;
+	}
+
+	&.alignfull {
+		max-width: none;
+		width: 100vw;
+		position: relative;
+		left: 50%;
+		right: 50%;
+		margin-left: -50vw;
+		margin-right: -50vw;
+	}
+}
+
+// Individual text animator items in editor
+.wp-block-telex-text-animator-item {
+	.text-animator-item__text {
+		padding: 0.75em 1em;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		background: #fff;
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+		min-height: 1.5em;
+		display: inline-block;
+		min-width: 100px;
+		width: 100%;
+		box-sizing: border-box;
+		font-size: inherit;
+
+		&:focus {
+			border-color: #007cba;
+			box-shadow: 0 0 0 1px #007cba;
+			outline: none;
+		}
+
+		&:hover {
+			border-color: #999;
+		}
+
+		&[data-is-placeholder-visible="true"] {
+			color: #999;
+			font-style: italic;
+		}
+	}
+
+	// Column layout styling
+	&.text-animator-item--column {
+		display: block;
+		width: 100%;
+
+		.text-animator-item__text {
+			width: 100%;
+			box-sizing: border-box;
+		}
+	}
+
+	// Row layout styling  
+	&.text-animator-item--row {
+		display: inline-block;
+		flex: 1;
+		min-width: 120px;
+		max-width: none;
+	}
+
+	// List view styling
+	.block-editor-list-view-block-select-button {
+		&::after {
+			content: " (" attr(data-text) ")";
+			font-style: italic;
+			opacity: 0.7;
+		}
+	}
+}

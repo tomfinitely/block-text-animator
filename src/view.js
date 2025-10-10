@@ -61,6 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		function animateToNextText(nextText) {
 			if (isAnimating) return;
 			isAnimating = true;
+			
+			// Pre-lock dimensions before any animation starts
+			lockDimensions(nextText);
+			
 			block.classList.add('text-animator--animating');
 			
 			switch (animationType) {
@@ -84,8 +88,54 @@ document.addEventListener('DOMContentLoaded', function() {
 					break;
 				default:
 					showText(nextText);
+					unlockDimensions();
 					endAnimation();
 			}
+		}
+		
+		function lockDimensions(nextText) {
+			const currentText = animatedTextEl.textContent;
+			const computedStyle = getComputedStyle(animatedTextEl);
+			const parentWidth = animatedTextEl.parentElement.offsetWidth;
+			
+			// Get current dimensions
+			const currentWidth = animatedTextEl.offsetWidth;
+			const currentHeight = animatedTextEl.offsetHeight;
+			
+			// Measure next text at constrained width
+			const tempSpan = document.createElement('span');
+			tempSpan.textContent = nextText;
+			tempSpan.style.visibility = 'hidden';
+			tempSpan.style.position = 'absolute';
+			tempSpan.style.display = 'inline-block';
+			tempSpan.style.maxWidth = parentWidth + 'px';
+			tempSpan.style.fontSize = computedStyle.fontSize;
+			tempSpan.style.fontFamily = computedStyle.fontFamily;
+			tempSpan.style.fontWeight = computedStyle.fontWeight;
+			tempSpan.style.letterSpacing = computedStyle.letterSpacing;
+			tempSpan.style.lineHeight = computedStyle.lineHeight;
+			tempSpan.style.wordBreak = computedStyle.wordBreak;
+			tempSpan.style.whiteSpace = computedStyle.whiteSpace;
+			document.body.appendChild(tempSpan);
+			const nextWidth = tempSpan.offsetWidth;
+			const nextHeight = tempSpan.offsetHeight;
+			document.body.removeChild(tempSpan);
+			
+			// Lock to maximum dimensions
+			const maxWidth = Math.max(currentWidth, nextWidth);
+			const maxHeight = Math.max(currentHeight, nextHeight);
+			
+			animatedTextEl.style.display = 'inline-block';
+			animatedTextEl.style.minWidth = maxWidth + 'px';
+			animatedTextEl.style.minHeight = maxHeight + 'px';
+			animatedTextEl.style.verticalAlign = 'top';
+		}
+		
+		function unlockDimensions() {
+			animatedTextEl.style.display = '';
+			animatedTextEl.style.minWidth = '';
+			animatedTextEl.style.minHeight = '';
+			animatedTextEl.style.verticalAlign = '';
 		}
 		
 		function typewriterAnimation(nextText) {
@@ -244,11 +294,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 			const glitchInterval = setInterval(() => {
 				if (glitchCount < maxGlitches) {
-					// Create random glitched text
+					// Create random glitched text - use 2 fewer characters to prevent wrapping
 					let glitchedText = '';
-					const targetLength = nextText.length;
+					const glitchLength = Math.max(1, currentText.length - 2);
 					
-					for (let i = 0; i < targetLength; i++) {
+					for (let i = 0; i < glitchLength; i++) {
 						glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
 					}
 					
@@ -290,6 +340,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			// Reset any inline styles
 			animatedTextEl.style.opacity = '';
 			animatedTextEl.style.transform = '';
+			
+			// Unlock dimensions
+			unlockDimensions();
 		}
 	}
 });

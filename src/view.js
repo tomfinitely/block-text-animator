@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				if (glitchCount < maxGlitches) {
 					// Create random glitched text - use 2 fewer characters to prevent wrapping
 					let glitchedText = '';
-					const glitchLength = Math.max(1, currentText.length - 2);
+					const glitchLength = Math.max(1, currentText.length - 4);
 					
 					for (let i = 0; i < glitchLength; i++) {
 						glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];

@@ -134,6 +134,7 @@
 		.text-animator__animated-text {
 			position: relative;
 			transition: none;
+			width: 100%;
 		}
 		
 		&.text-animator--animating .text-animator__animated-text {

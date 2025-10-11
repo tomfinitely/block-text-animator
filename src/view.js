@@ -294,9 +294,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 			const glitchInterval = setInterval(() => {
 				if (glitchCount < maxGlitches) {
-					// Use shorter of current/next text to prevent wrapping
+					// Use 80% of shortest text length to ensure no wrapping
 					let glitchedText = '';
-					const glitchLength = Math.min(currentText.length, nextText.length);
+					const baseLength = Math.min(currentText.length, nextText.length);
+					const glitchLength = Math.max(1, Math.floor(baseLength * 0.8));
 					
 					for (let i = 0; i < glitchLength; i++) {
 						glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
